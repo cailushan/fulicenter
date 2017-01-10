@@ -27,7 +27,6 @@
             android:id="@+id/layout_boutique"
             style="@style/menu_item_style"
             android:button="@null"
-            android:checked="true"
             android:drawableTop="@drawable/selector_menu_item_boutique"
             android:text="精选"
             android:textColor="@color/main_botton_text_color" />
@@ -36,7 +35,6 @@
             android:id="@+id/layout_category"
             style="@style/menu_item_style"
             android:button="@null"
-            android:checked="true"
             android:drawableTop="@drawable/selector_menu_item_category"
             android:text="分类"
             android:textColor="@color/main_botton_text_color" />
@@ -45,7 +43,6 @@
             android:id="@+id/layout_cart"
             style="@style/menu_item_style"
             android:button="@null"
-            android:checked="true"
             android:drawableTop="@drawable/selector_menu_item_cart"
             android:text="购物车"
             android:textColor="@color/main_botton_text_color" />
@@ -54,7 +51,6 @@
             android:id="@+id/layout_personal_center"
             style="@style/menu_item_style"
             android:button="@null"
-            android:checked="true"
             android:drawableTop="@drawable/selector_menu_item_personal_center"
             android:text="个人中心"
             android:textColor="@color/main_botton_text_color" />
