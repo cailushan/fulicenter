@@ -4,16 +4,12 @@ import java.io.Serializable;
 
 public class CategoryChildBean implements Serializable {
 
-    public CategoryChildBean() {
-    }
-
     /**
      * id : 348
      * parentId : 344
      * name : 败姐推荐
      * imageUrl : cat_image/256_4.png
      */
-
 
     private int id;
     private int parentId;

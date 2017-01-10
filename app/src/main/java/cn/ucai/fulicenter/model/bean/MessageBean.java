@@ -2,14 +2,10 @@ package cn.ucai.fulicenter.model.bean;
 
 public class MessageBean {
 
-    public MessageBean() {
-    }
-
     /**
      * success : true
      * msg : 添加收藏成功
      */
-
 
     private boolean success;
     private String msg;

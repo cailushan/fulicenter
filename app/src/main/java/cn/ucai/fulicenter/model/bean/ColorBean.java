@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class ColorBean implements Serializable {
 
-    public ColorBean() {
-    }
-
     /**
      * catId : 262
      * colorId : 1

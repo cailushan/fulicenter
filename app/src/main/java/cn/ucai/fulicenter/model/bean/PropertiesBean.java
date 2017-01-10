@@ -14,9 +14,6 @@ public class PropertiesBean implements Serializable {
     private String colorUrl;
     private AlbumsBean[] albums;
 
-    public PropertiesBean() {
-    }
-
     public int getId() {
         return id;
     }

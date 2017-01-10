@@ -7,10 +7,6 @@ public class AlbumsBean implements Serializable {
     private int pid;
     private int imgId;
     private String imgUrl;
-
-    public AlbumsBean() {
-    }
-
     private String thumbUrl;
 
     public int getPid() {

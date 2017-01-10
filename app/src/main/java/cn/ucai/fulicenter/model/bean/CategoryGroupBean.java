@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class CategoryGroupBean implements Serializable {
 
-    public CategoryGroupBean() {
-    }
-
     /**
      * id : 334
      * name : 配饰

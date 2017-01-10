@@ -22,9 +22,6 @@ public class GoodsDetailsBean implements Serializable {
     private boolean isPromote;
     private PropertiesBean[] properties;
 
-    public GoodsDetailsBean() {
-    }
-
     public int getId() {
         return id;
     }

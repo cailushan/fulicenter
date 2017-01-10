@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 public class BoutiqueBean implements Serializable {
 
-    public BoutiqueBean() {
-    }
-
     /**
      * id : 262
      * title : 不一样的新妆，不一样的美丽
@@ -14,7 +11,6 @@ public class BoutiqueBean implements Serializable {
      * name : 拯救头发，美丽新妆
      * imageurl : cat_image/boutique1.jpg
      */
-
 
     private int id;
     private String title;
