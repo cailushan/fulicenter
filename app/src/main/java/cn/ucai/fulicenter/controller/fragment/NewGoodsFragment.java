@@ -42,9 +42,6 @@ public class NewGoodsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    static final int ACTION_DOWNLOAD = 0;
-    static final int ACTION_PULL_UP = 1;
-    static final int ACTION_PULL_DOWN = 2;
     GridLayoutManager gm;
     GoodsAdapter mAdapter;
     ArrayList<NewGoodsBean> mList = new ArrayList<>();
@@ -74,12 +71,21 @@ public class NewGoodsFragment extends Fragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                mAdapter.setDragging(newState == RecyclerView.SCROLL_STATE_DRAGGING);
                 int lastPosition = gm.findLastVisibleItemPosition();
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && mAdapter.isMore() && lastPosition == mAdapter.getItemCount() - 1)
-                    ;
-                pageId++;
-                downloadList(ACTION_PULL_UP, pageId);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && mAdapter.isMore()
+                        && lastPosition == mAdapter.getItemCount() - 1) {
+                    pageId++;
+                    downloadList(I.ACTION_PULL_UP, pageId);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                // 让第一页不刷新
+                int fist = gm.findFirstCompletelyVisibleItemPosition();
+                mSrl.setEnabled(fist == 0);
             }
         });
     }
@@ -91,41 +97,35 @@ public class NewGoodsFragment extends Fragment {
                 mSrl.setRefreshing(true);
                 mTvRefresh.setVisibility(View.VISIBLE);
                 pageId = 1;
-                downloadList(ACTION_PULL_DOWN, pageId);
+                downloadList(I.ACTION_PULL_DOWN, pageId);
             }
         });
     }
 
     private void initData() {
         pageId = 1;
-        downloadList(ACTION_DOWNLOAD, pageId);
+        downloadList(I.ACTION_DOWNLOAD, pageId);
     }
 
     private void downloadList(final int action, int PageId) {
         model.downData(getContext(), I.CAT_ID, pageId, new OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
-                mAdapter.setMore(result != null && result.length > 0);
-                if (!mAdapter.isMore()) {
-                    if (action == ACTION_PULL_UP) {
-                        mAdapter.setFooter("没有更多数据了...");
-                    }
-                    return;
-                }
-                mAdapter.setFooter("加载更多数据...");
-                ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
-                switch (action) {
-                    case ACTION_DOWNLOAD:
+                mSrl.setRefreshing(false);
+                mTvRefresh.setVisibility(View.GONE);
+                mAdapter.setMore(true);
+                if (result != null && result.length > 0) {
+                    ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
+                    if (action == I.ACTION_DOWNLOAD || action == I.ACTION_PULL_DOWN) {
                         mAdapter.initData(list);
-                        break;
-                    case ACTION_PULL_DOWN:
-                        mSrl.setRefreshing(false);
-                        mTvRefresh.setVisibility(View.GONE);
-                        mAdapter.initData(list);
-                        break;
-                    case ACTION_PULL_UP:
+                    } else {
                         mAdapter.addData(list);
-                        break;
+                    }
+                    if (list.size() < I.PAGE_SIZE_DEFAULT) {
+                        mAdapter.setMore(false);
+                    }
+                } else {
+                    mAdapter.setMore(false);
                 }
             }
 
@@ -144,7 +144,7 @@ public class NewGoodsFragment extends Fragment {
                 getResources().getColor(R.color.google_blue)
         );
         gm = new GridLayoutManager(getContext(), I.COLUM_NUM);
-        mRv.addItemDecoration(new SpaceItemDecoration(12));
+        mRv.addItemDecoration(new SpaceItemDecoration(10));
         mRv.setLayoutManager(gm);
         mRv.setHasFixedSize(true);
         mAdapter = new GoodsAdapter(getContext(), mList);
