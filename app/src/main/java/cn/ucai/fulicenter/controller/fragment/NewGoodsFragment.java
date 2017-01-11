@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.SpaceItemDecoration;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.adapter.GoodsAdapter;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
@@ -143,6 +144,7 @@ public class NewGoodsFragment extends Fragment {
                 getResources().getColor(R.color.google_blue)
         );
         gm = new GridLayoutManager(getContext(), I.COLUM_NUM);
+        mRv.addItemDecoration(new SpaceItemDecoration(12));
         mRv.setLayoutManager(gm);
         mRv.setHasFixedSize(true);
         mAdapter = new GoodsAdapter(getContext(), mList);
