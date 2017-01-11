@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:text="@string/now_refresh"
+    android:text="刷新中...."
+    android:textColor="#f00"
     android:textSize="18sp"
     android:textStyle="bold"
-
-    >
+    android:visibility="gone">
 
 </TextView>
