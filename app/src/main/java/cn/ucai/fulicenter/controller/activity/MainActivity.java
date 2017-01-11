@@ -8,6 +8,7 @@ import android.widget.RadioButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
 
 public class MainActivity extends AppCompatActivity {
     int index, currentIndex;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         rbs[2] = layoutCategory;
         rbs[3] = layoutCart;
         rbs[4] = layoutPersonalCenter;
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, new NewGoodsFragment())
+                .commit();
 
     }
 
