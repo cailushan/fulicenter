@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.controller.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
+import cn.ucai.fulicenter.controller.activity.BoutiqueChildActivity;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 import cn.ucai.fulicenter.view.FooterViewHolder;
@@ -65,7 +67,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder ParentHolder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder ParentHolder, final int position) {
         if (getItemViewType(position) == I.TYPE_FOOTER) {
             FooterViewHolder vh = (FooterViewHolder) ParentHolder;
             vh.tvFooter.setText(getFooter());
@@ -77,6 +79,14 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
         vh.mtvBoutiqueName.setText(mList.get(position).getName());
         vh.mtvBoutiqueTitle.setText(mList.get(position).getTitle());
         vh.mtvBoutiqueDescription.setText(mList.get(position).getDescription());
+        vh.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext, BoutiqueChildActivity.class).putExtra(I.NewAndBoutiqueGoods.CAT_ID
+                        , mList.get(position).getId()));
+                mContext.startActivity(new Intent(mContext, BoutiqueChildActivity.class).putExtra(I.Boutique.TITLE, mList.get(position).getTitle()));
+            }
+        });
 
     }
 
@@ -115,6 +125,8 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
         TextView mtvBoutiqueName;
         @BindView(R.id.tvBoutiqueDescription)
         TextView mtvBoutiqueDescription;
+        @BindView(R.id.layout_boutique_item)
+        RelativeLayout mrlBoutiqueItem;
 
         BoutiqueViewHolder(View view) {
             super(view);
