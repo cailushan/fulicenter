@@ -19,6 +19,7 @@ import cn.ucai.fulicenter.controller.activity.BoutiqueChildActivity;
 import cn.ucai.fulicenter.model.bean.BoutiqueBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 import cn.ucai.fulicenter.view.FooterViewHolder;
+import cn.ucai.fulicenter.view.MFGT;
 
 /**
  * Created by Administrator on 2017/1/11 0011.
@@ -82,9 +83,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
         vh.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mContext.startActivity(new Intent(mContext, BoutiqueChildActivity.class).putExtra(I.NewAndBoutiqueGoods.CAT_ID
-                        , mList.get(position).getId()));
-                mContext.startActivity(new Intent(mContext, BoutiqueChildActivity.class).putExtra(I.Boutique.TITLE, mList.get(position).getTitle()));
+                MFGT.gotoBoutiqueChild(mContext, mList.get(position));
             }
         });
 

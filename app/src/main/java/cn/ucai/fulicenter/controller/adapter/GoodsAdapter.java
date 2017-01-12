@@ -20,6 +20,7 @@ import cn.ucai.fulicenter.controller.activity.GoodsDetailActivity;
 import cn.ucai.fulicenter.model.bean.NewGoodsBean;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
 import cn.ucai.fulicenter.view.FooterViewHolder;
+import cn.ucai.fulicenter.view.MFGT;
 
 /**
  * Created by Administrator on 2017/1/11 0011.
@@ -68,7 +69,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder ParentHolder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder ParentHolder, final int position) {
         if (getItemViewType(position) == I.TYPE_FOOTER) {
             FooterViewHolder vh = (FooterViewHolder) ParentHolder;
             vh.tvFooter.setText(getFooter());
@@ -81,6 +82,12 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         vh.mTvGoodsName.setText(mList.get(position).getGoodsName());
         vh.mTvGoodsPrice.setText(mList.get(position).getCurrencyPrice());
         vh.mLayoutGoods.setTag(goods.getGoodsId());
+        vh.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MFGT.gotoGoodsDetail(mContext, mList.get(position).getGoodsId());
+            }
+        });
 
     }
 
@@ -125,12 +132,6 @@ public class GoodsAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, view);
         }
 
-        @OnClick(R.id.layout_goods)
-        public void onGoodsItemClick() {
-            int goodsId = (int) mLayoutGoods.getTag();
-            mContext.startActivity(new Intent(mContext, GoodsDetailActivity.class)
-                    .putExtra(I.GoodsDetails.KEY_GOODS_ID, goodsId));
-        }
     }
 
 }
