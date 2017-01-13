@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         setFragment();
         if (index != currentIndex) {
             setRadioStatus();
+        }else {
+            getSupportFragmentManager().beginTransaction().show(mFragments[index]).commit();
         }
     }
 

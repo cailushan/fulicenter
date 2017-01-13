@@ -42,7 +42,7 @@ public class NewGoodsBean implements Serializable {
     private String colorName;
     private String colorCode;
     private String colorUrl;
-    private String addTime;
+    private long addTime;
 
     public int getId() {
         return id;
@@ -180,11 +180,11 @@ public class NewGoodsBean implements Serializable {
         this.colorUrl = colorUrl;
     }
 
-    public String getAddTime() {
+    public long getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(String addTime) {
+    public void setAddTime(long addTime) {
         this.addTime = addTime;
     }
 

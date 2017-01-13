@@ -162,4 +162,9 @@ public class NewGoodsFragment extends Fragment {
         });
 
     }
+
+    public void sortGoods(int sortBy) {
+        mAdapter.sortGoods(sortBy);
+    }
+
 }

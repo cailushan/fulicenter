@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.activity.GoodsDetailActivity" />
-        <activity android:name=".controller.activity.BoutiqueChildActivity"></activity>
+        <activity android:name=".controller.activity.BoutiqueChildActivity" />
+        <activity android:name=".controller.activity.CategoryChildActivity"></activity>
     </application>
 
 </manifest>
