@@ -65,7 +65,8 @@ public class CategoryFragment extends Fragment {
                     ArrayList<CategoryGroupBean> list = ConvertUtils.array2List(result);
                     mGroupBean.addAll(list);
                     for (int i = 0; i < list.size(); i++) {
-                        downloadChildData(list.get(i).getId());
+                        mChildBean.add(new ArrayList<CategoryChildBean>());
+                        downloadChildData(list.get(i).getId(), i);
                     }
 
                 } else {
@@ -82,14 +83,14 @@ public class CategoryFragment extends Fragment {
 
     }
 
-    private void downloadChildData(int id) {
+    private void downloadChildData(int id, final int index) {
         model.downData(getContext(), id, new OnCompleteListener<CategoryChildBean[]>() {
             @Override
             public void onSuccess(CategoryChildBean[] result) {
                 groupCount++;
                 if (result != null) {
                     ArrayList<CategoryChildBean> list = ConvertUtils.array2List(result);
-                    mChildBean.add(list);
+                    mChildBean.set(index, list);
                 }
                 if (groupCount == mGroupBean.size()) {
                     mAdapter.initData(mGroupBean, mChildBean);
