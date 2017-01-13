@@ -150,5 +150,16 @@ public class NewGoodsFragment extends Fragment {
         mRv.setHasFixedSize(true);
         mAdapter = new GoodsAdapter(getContext(), mList);
         mRv.setAdapter(mAdapter);
+        //页脚居中
+        gm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == mAdapter.getItemCount() - 1) {
+                    return 2;
+                }
+                return 1;
+            }
+        });
+
     }
 }
