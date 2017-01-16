@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.NewGoodsFragment;
+import cn.ucai.fulicenter.view.CatFilterButton;
 import cn.ucai.fulicenter.view.MFGT;
 
 public class CategoryChildActivity extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class CategoryChildActivity extends AppCompatActivity {
     Button btnSortPrice;
     @BindView(R.id.btn_sort_addtime)
     Button btnSortAddtime;
+    @BindView(R.id.cat_filter)
+    CatFilterButton catFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class CategoryChildActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, mNewGoodsFragment)
                 .commit();
+        String groupName = getIntent().getStringExtra(I.CategoryGroup.NAME);
+        catFilter.initCatFilterButton(groupName, null);
     }
 
     @OnClick({R.id.btn_sort_price, R.id.btn_sort_addtime})

@@ -45,9 +45,10 @@ public class MFGT {
         startActivity((Activity) context, intent);
     }
 
-    public static void gotoCategoryChild(Context context, int catId) {
+    public static void gotoCategoryChild(Context context, int catId, String groupName) {
         Intent intent = new Intent(context, CategoryChildActivity.class);
         intent.putExtra(I.NewAndBoutiqueGoods.CAT_ID, catId);
+        intent.putExtra(I.CategoryGroup.NAME, groupName);
         startActivity((Activity) context, intent);
     }
 
