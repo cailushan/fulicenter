@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivBack:
+                MFGT.finish(this);
                 break;
             case R.id.btnLogin:
                 break;
@@ -40,8 +41,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.ivBack)
-    public void onClick() {
-        MFGT.finish(this);
-    }
 }
