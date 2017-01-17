@@ -23,9 +23,9 @@ import cn.ucai.fulicenter.view.MFGT;
 public class PersonalCenterFragment extends Fragment {
 
 
-    @BindView(R.id.ivUserAvatar)
+    @BindView(R.id.iv_user_avatar)
     ImageView ivUserAvatar;
-    @BindView(R.id.tvUserName)
+    @BindView(R.id.tv_user_name)
     TextView tvUserName;
 
     public PersonalCenterFragment() {
