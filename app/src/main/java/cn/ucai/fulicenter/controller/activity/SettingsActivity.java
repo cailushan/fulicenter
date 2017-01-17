@@ -2,7 +2,9 @@ package cn.ucai.fulicenter.controller.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -10,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
+import cn.ucai.fulicenter.controller.fragment.PersonalCenterFragment;
 import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.SharedPreferenceUtils;
 import cn.ucai.fulicenter.model.utils.ImageLoader;
@@ -24,6 +27,8 @@ public class SettingsActivity extends AppCompatActivity {
     TextView tvUserName;
     @BindView(R.id.tvUserNick)
     TextView tvUserNick;
+    @BindView(R.id.layout_user_nickname)
+    RelativeLayout layoutUserNickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +55,23 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btBack)
-    public void back() {
+    public void btback() {
         FuLiCenterApplication.setUser(null);
         SharedPreferenceUtils.getInstance(this).removeUser();
         MFGT.gotoLogin(this);
         finish();
+    }
+
+    @OnClick(R.id.layout_user_nickname)
+    public void updateNick() {
+        String nick = tvUserNick.getText().toString().trim();
+        if (TextUtils.isEmpty(nick)) {
+
+        }
+    }
+
+    @OnClick(R.id.ivBack)
+    public void ivback() {
+        MFGT.finish(this);
     }
 }

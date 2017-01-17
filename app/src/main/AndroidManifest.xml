@@ -24,7 +24,7 @@
         <activity android:name=".controller.activity.CategoryChildActivity" />
         <activity android:name=".controller.activity.LoginActivity" />
         <activity android:name=".controller.activity.RegisterActivity" />
-        <activity android:name=".controller.activity.SettingsActivity"></activity>
+        <activity android:name=".controller.activity.SettingsActivity" />
     </application>
 
 </manifest>
