@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,24 +32,20 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </RelativeLayout>
-    -
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        -
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            -
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FF5000">
-                -
 
                 <RelativeLayout
                     android:id="@+id/center_user_info"
@@ -60,7 +55,7 @@
                     android:layout_marginRight="10dp">
 
                     <ImageView
-                        android:id="@+id/iv_user_avatar"
+                        android:id="@+id/ivUserAvatar"
                         android:layout_width="60dip"
                         android:layout_height="60dip"
                         android:layout_alignParentLeft="true"
@@ -70,12 +65,12 @@
                         android:src="@drawable/contactlogo" />
 
                     <TextView
-                        android:id="@+id/tv_user_name"
+                        android:id="@+id/tvUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/iv_user_avatar"
+                        android:layout_toRightOf="@id/ivUserAvatar"
                         android:text="恋上猫女衣坊"
                         android:textColor="#ffffff"
                         android:textSize="18sp" />
@@ -86,10 +81,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/tv_user_name"
+                        android:layout_toRightOf="@id/tvUserName"
                         android:src="@drawable/tb_icon_home_qrcode_normal" />
                 </RelativeLayout>
-                -
 
                 <RelativeLayout
                     android:id="@+id/center_user_collects"
@@ -98,7 +92,6 @@
                     android:layout_below="@id/center_user_info"
                     android:layout_marginTop="10dp"
                     android:background="#20000000">
-                    -
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -106,7 +99,6 @@
                         android:orientation="horizontal"
                         android:paddingBottom="5dp"
                         android:paddingTop="5dp">
-                        -
 
                         <LinearLayout
                             android:id="@+id/layout_center_collect"
@@ -116,7 +108,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/tv_collect_count"
+                                android:id="@+id/tvCollectCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -138,7 +130,6 @@
                             android:layout_marginBottom="7dp"
                             android:layout_marginTop="7dp"
                             android:background="#ffffff" />
-                        -
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -168,7 +159,6 @@
                             android:layout_marginBottom="7dp"
                             android:layout_marginTop="7dp"
                             android:background="#ffffff" />
-                        -
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -194,10 +184,8 @@
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>
-            - <!-- 我的订单
-  -->
-            -
 
+            <!--我的订单-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -230,19 +218,64 @@
                     android:src="@drawable/right_arrow_icon" />
             </LinearLayout>
 
-            <GridView
-                android:id="@+id/center_user_order_lis"
+            <!--<GridView-->
+            <!--android:id="@+id/center_user_order_lis"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="1dp"-->
+            <!--android:cacheColorHint="#00000000"-->
+            <!--android:background="#ffffff"-->
+            <!--android:paddingTop="20dp"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:numColumns="5">-->
+            <!--</GridView>-->
+            <LinearLayout
+                android:id="@+id/main_bottm"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="1dp"
-                android:background="#ffffff"
-                android:cacheColorHint="#00000000"
-                android:numColumns="5"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="20dp" />
-            -
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnOrderList1"
+                    style="@style/style_menu_list_layout"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/order_list1" />
+
+                <Button
+                    android:id="@+id/btnOrderList2"
+                    style="@style/style_menu_list_layout"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/order_list2" />
+
+                <Button
+                    android:id="@+id/btnOrderList3"
+                    style="@style/style_menu_list_layout"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/order_list3" />
+
+                <Button
+                    android:id="@+id/btnOrderList4"
+                    style="@style/style_menu_list_layout"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/order_list4" />
+
+                <Button
+                    android:id="@+id/btnOrderList5"
+                    style="@style/style_menu_list_layout"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@drawable/order_list5" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -269,7 +302,6 @@
                     android:layout_marginRight="10dp"
                     android:src="@drawable/right_arrow_icon" />
             </LinearLayout>
-            -
 
             <LinearLayout
                 android:id="@+id/ll_user_life"
@@ -302,7 +334,6 @@
                     android:layout_marginRight="10dp"
                     android:src="@drawable/right_arrow_icon" />
             </LinearLayout>
-            -
 
             <LinearLayout
                 android:id="@+id/ll_user_store"
@@ -341,7 +372,6 @@
                     android:layout_marginRight="10dp"
                     android:src="@drawable/right_arrow_icon" />
             </LinearLayout>
-            -
 
             <LinearLayout
                 android:id="@+id/ll_user_members"
@@ -380,7 +410,6 @@
                     android:layout_marginRight="10dp"
                     android:src="@drawable/right_arrow_icon" />
             </LinearLayout>
-            -
 
             <LinearLayout
                 android:layout_width="match_parent"
