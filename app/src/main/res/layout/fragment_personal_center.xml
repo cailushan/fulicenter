@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFEFEF"
+    android:background="@color/fragment_bg"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -13,6 +13,7 @@
             android:id="@+id/center_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:paddingBottom="5dp"
             android:paddingTop="5dp">
@@ -48,30 +49,29 @@
             android:layout_marginRight="10dp">
 
             <ImageView
-                android:id="@+id/iv_user_avatar"
+                android:id="@+id/ivUserAvatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/contactlogo" />
 
-
             <TextView
-                android:id="@+id/tv_user_name"
+                android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
-                android:layout_marginStart="11dp"
-                android:layout_toEndOf="@+id/iv_user_avatar"
+                android:layout_toRightOf="@id/ivUserAvatar"
                 android:text="恋上猫女衣坊"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
+
             <ImageView
                 android:id="@+id/iv_user_qrcode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/tv_user_name"
+                android:layout_toRightOf="@id/tvUserName"
                 android:src="@drawable/tb_icon_home_qrcode_normal" />
         </RelativeLayout>
 
@@ -98,11 +98,11 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_collect_count"
+                        android:id="@+id/tvCollectCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="8"
+                        android:text="20"
                         android:textColor="@color/white" />
 
                     <TextView
@@ -131,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="18"
+                        android:text="10"
                         android:textColor="@color/white" />
 
                     <TextView
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="28"
+                        android:text="180"
                         android:textColor="@color/white" />
 
                     <TextView
@@ -172,9 +172,12 @@
                         android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
+
         </RelativeLayout>
     </RelativeLayout>
 
+
+    <!--我的订单-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -186,6 +189,7 @@
         android:paddingTop="10dp">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -207,21 +211,56 @@
             android:src="@drawable/right_arrow_icon" />
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/center_user_order_lis"
+    <LinearLayout
+        android:id="@+id/main_bottm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="1dp"
         android:background="@color/white"
-        android:cacheColorHint="#00000000"
-        android:numColumns="5"
-        android:paddingBottom="10dp"
-        android:paddingTop="20dp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOrderList1"
+            style="@style/style_menu_list_layout"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/order_list1" />
+
+        <Button
+            android:id="@+id/btnOrderList2"
+            style="@style/style_menu_list_layout"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/order_list2" />
+
+        <Button
+            android:id="@+id/btnOrderList3"
+            style="@style/style_menu_list_layout"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/order_list3" />
+
+        <Button
+            android:id="@+id/btnOrderList4"
+            style="@style/style_menu_list_layout"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/order_list4" />
+
+        <Button
+            android:id="@+id/btnOrderList5"
+            style="@style/style_menu_list_layout"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/order_list5" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
@@ -262,6 +301,7 @@
             android:src="@drawable/center_card_coupon1" />
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -337,7 +377,8 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="会员卡"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:id="@+id/textView2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -383,4 +424,5 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/right_arrow_icon" />
     </LinearLayout>
+
 </LinearLayout>
