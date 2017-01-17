@@ -221,35 +221,35 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnOrderList1"
+            android:id="@+id/bt1"
             style="@style/style_menu_list_layout"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/order_list1" />
 
         <Button
-            android:id="@+id/btnOrderList2"
+            android:id="@+id/bt2"
             style="@style/style_menu_list_layout"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/order_list2" />
 
         <Button
-            android:id="@+id/btnOrderList3"
+            android:id="@+id/bt3"
             style="@style/style_menu_list_layout"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/order_list3" />
 
         <Button
-            android:id="@+id/btnOrderList4"
+            android:id="@+id/bt4"
             style="@style/style_menu_list_layout"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/order_list4" />
 
         <Button
-            android:id="@+id/btnOrderList5"
+            android:id="@+id/bt5"
             style="@style/style_menu_list_layout"
             android:layout_weight="1"
             android:button="@null"
