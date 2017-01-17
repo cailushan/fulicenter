@@ -90,9 +90,11 @@ public class LoginActivity extends AppCompatActivity {
                                 if (result.isRetMsg()) {
                                     User user = (User) result.getRetData();
                                     boolean saveUser = UserDao.getInstance().saveUser(user);
-                                    Log.e("Login", "saveUser=" + saveUser);
-                                    SharedPreferenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
-                                    FuLiCenterApplication.setUser(user);
+                                    Log.e("main", "saveUser=" + saveUser);
+                                    if (saveUser) {
+                                        SharedPreferenceUtils.getInstance(LoginActivity.this).saveUser(user.getMuserName());
+                                        FuLiCenterApplication.setUser(user);
+                                    }
                                     MFGT.finish(LoginActivity.this);
                                 } else {
                                     if (result.getRetCode() == I.MSG_LOGIN_UNKNOW_USER) {
