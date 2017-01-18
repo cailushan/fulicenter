@@ -12,9 +12,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.model.bean.AlbumsBean;
 import cn.ucai.fulicenter.model.bean.GoodsDetailsBean;
+import cn.ucai.fulicenter.model.bean.MessageBean;
+import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.IModelGoods;
 import cn.ucai.fulicenter.model.net.ModelGoods;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
@@ -61,6 +64,7 @@ public class GoodsDetailActivity extends AppCompatActivity {
     RelativeLayout layoutBanner;
     @BindView(R.id.activity_goods_detail)
     RelativeLayout activityGoodsDetail;
+    boolean isCollect;
 
 
     @Override
@@ -135,5 +139,53 @@ public class GoodsDetailActivity extends AppCompatActivity {
     @OnClick(R.id.ivBack)
     public void onClick() {
         MFGT.finish(this);
+    }
+
+    @OnClick(R.id.iv_good_collect)
+    public void setCollectListener() {
+        User user = FuLiCenterApplication.getUser();
+        if (user != null) {
+
+        } else {
+            MFGT.gotoLogin(this);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initCollectStatus();
+    }
+
+    private void setCollectStatus() {
+        if (isCollect) {
+            ivGoodCollect.setImageResource(R.mipmap.bg_collect_out);
+        } else {
+            ivGoodCollect.setImageResource(R.mipmap.bg_collect_in);
+        }
+    }
+
+    private void initCollectStatus() {
+        User user = FuLiCenterApplication.getUser();
+        if (user != null) {
+            mModel.isCollect(this, goodsId, user.getMuserName(), new OnCompleteListener<MessageBean>() {
+                @Override
+                public void onSuccess(MessageBean result) {
+                    if (result != null && result.isSuccess()) {
+                        isCollect = true;
+                    } else {
+                        isCollect = false;
+                    }
+                    setCollectStatus();
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            });
+
+        }
+
     }
 }
