@@ -20,6 +20,7 @@ import cn.ucai.fulicenter.model.net.ModelUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.CommonUtils;
 import cn.ucai.fulicenter.model.utils.ResultUtils;
+import cn.ucai.fulicenter.view.MFGT;
 
 public class UpdateNickActivity extends AppCompatActivity {
     User user;
@@ -101,4 +102,8 @@ public class UpdateNickActivity extends AppCompatActivity {
     }
 
 
+    @OnClick(R.id.ivBack)
+    public void back() {
+        MFGT.finish(this);
+    }
 }
