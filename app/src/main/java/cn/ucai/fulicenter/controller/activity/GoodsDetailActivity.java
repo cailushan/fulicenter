@@ -21,6 +21,7 @@ import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.IModelGoods;
 import cn.ucai.fulicenter.model.net.ModelGoods;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
+import cn.ucai.fulicenter.model.utils.CommonUtils;
 import cn.ucai.fulicenter.view.FlowIndicator;
 import cn.ucai.fulicenter.view.MFGT;
 import cn.ucai.fulicenter.view.SlideAutoLoopView;
@@ -145,10 +146,30 @@ public class GoodsDetailActivity extends AppCompatActivity {
     public void setCollectListener() {
         User user = FuLiCenterApplication.getUser();
         if (user != null) {
-
+            setCollect(user);
         } else {
             MFGT.gotoLogin(this);
         }
+    }
+
+    private void setCollect(User user) {
+        mModel.setCollect(this, goodsId, user.getMuserName(),
+                isCollect ? I.ACTION_DELETE_COLLECT : I.ACTION_ADD_COLLECT,
+                new OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if (result != null && result.isSuccess()) {
+                            isCollect = !isCollect;
+                            setCollectStatus();
+                            CommonUtils.showShortToast(result.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
     }
 
     @Override
