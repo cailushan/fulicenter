@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         if (!mFragments[index].isAdded()) {
             ft.add(R.id.fragment_container, mFragments[index]);
         }
-        ft.show(mFragments[index]).commitAllowingStateLoss();
+        ft.show(mFragments[index]).commit();
 
     }
 

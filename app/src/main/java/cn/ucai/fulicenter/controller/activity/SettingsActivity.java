@@ -1,5 +1,6 @@
 package cn.ucai.fulicenter.controller.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.application.FuLiCenterApplication;
+import cn.ucai.fulicenter.application.I;
 import cn.ucai.fulicenter.controller.fragment.PersonalCenterFragment;
 import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.SharedPreferenceUtils;
@@ -64,14 +66,19 @@ public class SettingsActivity extends AppCompatActivity {
 
     @OnClick(R.id.layout_user_nickname)
     public void updateNick() {
-        String nick = tvUserNick.getText().toString().trim();
-        if (TextUtils.isEmpty(nick)) {
-
-        }
+        MFGT.gotoUpdateNick(this);
     }
 
     @OnClick(R.id.ivBack)
     public void ivback() {
         MFGT.finish(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == I.REQUEST_CODE_NICK) {
+            tvUserNick.setText(FuLiCenterApplication.getUser().getMuserNick());
+        }
     }
 }

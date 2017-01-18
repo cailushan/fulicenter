@@ -51,7 +51,12 @@ public class PersonalCenterFragment extends Fragment {
         } else {
             MFGT.gotoLogin(getActivity());
         }
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void loadUserInfo(User user) {
