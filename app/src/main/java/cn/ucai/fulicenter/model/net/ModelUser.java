@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.File;
 
 import cn.ucai.fulicenter.application.I;
+import cn.ucai.fulicenter.model.bean.MessageBean;
 import cn.ucai.fulicenter.model.utils.MD5;
 import cn.ucai.fulicenter.model.utils.OkHttpUtils;
 
@@ -58,4 +59,15 @@ public class ModelUser implements IModelUser {
                 .targetClass(String.class)
                 .execute(listener);
     }
+
+    @Override
+    public void collectCount(Context context, String userName, OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_COLLECT_COUNT)
+                .addParam(I.Collect.USER_NAME, userName)
+                .targetClass(MessageBean.class)
+                .execute(listener);
+    }
+
+
 }
