@@ -13,15 +13,15 @@ import cn.ucai.fulicenter.model.bean.User;
 
 public class FuLiCenterApplication extends Application {
     private static FuLiCenterApplication instance;
-    private static HashMap<Integer, CartBean> myCartList = new HashMap<>();
-
-    public static HashMap<Integer, CartBean> getMyCartList() {
-        return myCartList;
-    }
-
-    public static void setMyCartList(HashMap<Integer, CartBean> myCartList) {
-        FuLiCenterApplication.myCartList = myCartList;
-    }
+//    private static HashMap<Integer, CartBean> myCartList = new HashMap<>();
+//
+//    public static HashMap<Integer, CartBean> getMyCartList() {
+//        return myCartList;
+//    }
+//
+//    public static void setMyCartList(HashMap<Integer, CartBean> myCartList) {
+//        FuLiCenterApplication.myCartList = myCartList;
+//    }
 
     public static FuLiCenterApplication getInstance() {
         return instance;
