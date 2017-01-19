@@ -27,7 +27,8 @@
         <activity android:name=".controller.activity.LoginActivity" />
         <activity android:name=".controller.activity.RegisterActivity" />
         <activity android:name=".controller.activity.SettingsActivity" />
-        <activity android:name=".controller.activity.UpdateNickActivity"></activity>
+        <activity android:name=".controller.activity.UpdateNickActivity" />
+        <activity android:name=".controller.activity.CollectActivity"></activity>
     </application>
 
 </manifest>

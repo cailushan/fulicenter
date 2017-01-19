@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.io.File;
 
+import cn.ucai.fulicenter.model.bean.CollectBean;
 import cn.ucai.fulicenter.model.bean.MessageBean;
 
 
@@ -22,4 +23,5 @@ public interface IModelUser {
 
     void collectCount(Context context, String userName, OnCompleteListener<MessageBean> listener);
 
+    void downloadCollect(Context context, String username, int pageId, OnCompleteListener<CollectBean[]> listener);
 }

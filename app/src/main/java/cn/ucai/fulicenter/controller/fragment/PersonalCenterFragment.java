@@ -96,4 +96,10 @@ public class PersonalCenterFragment extends Fragment {
     public void settings() {
         MFGT.gotoSettings(getActivity());
     }
+
+    @OnClick(R.id.layout_center_collect)
+    public void onClick() {
+        MFGT.gotoCollect(getActivity());
+    }
+
 }
