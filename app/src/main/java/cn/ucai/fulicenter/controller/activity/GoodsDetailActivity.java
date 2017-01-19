@@ -218,19 +218,23 @@ public class GoodsDetailActivity extends AppCompatActivity {
     @OnClick(R.id.iv_good_cart)
     public void updateCart() {
         User user = FuLiCenterApplication.getUser();
-        modelUser = new ModelUser();
-        modelUser.updateCart(this, I.ACTION_CART_ADD, user.getMuserName(), goodsId, 1, 0, new OnCompleteListener<MessageBean>() {
-            @Override
-            public void onSuccess(MessageBean result) {
-                if (result != null && result.isSuccess()) {
-                    CommonUtils.showLongToast(R.string.add_goods_success);
+        if (modelUser != null) {
+            modelUser = new ModelUser();
+            modelUser.updateCart(this, I.ACTION_CART_ADD, user.getMuserName(), goodsId, 1, 0, new OnCompleteListener<MessageBean>() {
+                @Override
+                public void onSuccess(MessageBean result) {
+                    if (result != null && result.isSuccess()) {
+                        CommonUtils.showLongToast(R.string.add_goods_success);
+                    }
                 }
-            }
 
-            @Override
-            public void onError(String error) {
+                @Override
+                public void onError(String error) {
 
-            }
-        });
+                }
+            });
+        } else {
+            MFGT.gotoLogin(this);
+        }
     }
 }
