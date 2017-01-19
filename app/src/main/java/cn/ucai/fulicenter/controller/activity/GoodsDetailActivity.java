@@ -20,7 +20,9 @@ import cn.ucai.fulicenter.model.bean.GoodsDetailsBean;
 import cn.ucai.fulicenter.model.bean.MessageBean;
 import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.IModelGoods;
+import cn.ucai.fulicenter.model.net.IModelUser;
 import cn.ucai.fulicenter.model.net.ModelGoods;
+import cn.ucai.fulicenter.model.net.ModelUser;
 import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.CommonUtils;
 import cn.ucai.fulicenter.view.FlowIndicator;
@@ -67,6 +69,7 @@ public class GoodsDetailActivity extends AppCompatActivity {
     @BindView(R.id.activity_goods_detail)
     RelativeLayout activityGoodsDetail;
     boolean isCollect;
+    IModelUser modelUser;
 
 
     @Override
@@ -210,5 +213,24 @@ public class GoodsDetailActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @OnClick(R.id.iv_good_cart)
+    public void updateCart() {
+        User user = FuLiCenterApplication.getUser();
+        modelUser = new ModelUser();
+        modelUser.updateCart(this, I.ACTION_CART_ADD, user.getMuserName(), goodsId, 1, 0, new OnCompleteListener<MessageBean>() {
+            @Override
+            public void onSuccess(MessageBean result) {
+                if (result != null && result.isSuccess()) {
+                    CommonUtils.showLongToast(R.string.add_goods_success);
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 }

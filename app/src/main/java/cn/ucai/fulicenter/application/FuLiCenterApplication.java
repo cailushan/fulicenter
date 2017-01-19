@@ -2,6 +2,9 @@ package cn.ucai.fulicenter.application;
 
 import android.app.Application;
 
+import java.util.HashMap;
+
+import cn.ucai.fulicenter.model.bean.CartBean;
 import cn.ucai.fulicenter.model.bean.User;
 
 /**
@@ -10,6 +13,15 @@ import cn.ucai.fulicenter.model.bean.User;
 
 public class FuLiCenterApplication extends Application {
     private static FuLiCenterApplication instance;
+    private static HashMap<Integer, CartBean> myCartList = new HashMap<>();
+
+    public static HashMap<Integer, CartBean> getMyCartList() {
+        return myCartList;
+    }
+
+    public static void setMyCartList(HashMap<Integer, CartBean> myCartList) {
+        FuLiCenterApplication.myCartList = myCartList;
+    }
 
     public static FuLiCenterApplication getInstance() {
         return instance;
@@ -18,11 +30,12 @@ public class FuLiCenterApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        instance=this;
+        instance = this;
     }
 
 
     private static User user;
+
     public static User getUser() {
         return user;
     }

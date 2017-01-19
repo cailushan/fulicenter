@@ -4,6 +4,8 @@ import android.content.Context;
 
 import java.io.File;
 
+import cn.ucai.fulicenter.application.I;
+import cn.ucai.fulicenter.model.bean.CartBean;
 import cn.ucai.fulicenter.model.bean.CollectBean;
 import cn.ucai.fulicenter.model.bean.MessageBean;
 
@@ -26,4 +28,10 @@ public interface IModelUser {
     void downloadCollect(Context context, String username, int pageId, OnCompleteListener<CollectBean[]> listener);
 
     void deleteCollects(Context context, String username, int goodsId, OnCompleteListener<MessageBean> listener);
+
+    void getCart(Context context, String userName, OnCompleteListener<CartBean[]> listener);
+
+    void updateCart(Context context, int action, String userName, int goodIs, int count, int cartId, OnCompleteListener<MessageBean> listener);
+
+
 }
