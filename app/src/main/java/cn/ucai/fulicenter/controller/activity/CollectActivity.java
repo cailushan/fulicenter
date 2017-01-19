@@ -1,5 +1,9 @@
 package cn.ucai.fulicenter.controller.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +37,7 @@ public class CollectActivity extends AppCompatActivity {
     IModelUser model;
     int pageId = 1;
     User user = null;
+    UpdateCollectReceiver mReceiver;
 
     @BindView(R.id.tvRefresh)
     TextView mTvRefresh;
@@ -50,6 +55,13 @@ public class CollectActivity extends AppCompatActivity {
         model = new ModelUser();
         initData();
         setListener();
+        mReceiver = new UpdateCollectReceiver();
+        setReceiverListener();
+    }
+
+    private void setReceiverListener() {
+        IntentFilter filter = new IntentFilter(I.BROADCAST_UPDATA_COLLECT);
+        registerReceiver(mReceiver, filter);
     }
 
     private void setListener() {
@@ -63,8 +75,6 @@ public class CollectActivity extends AppCompatActivity {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 final int lastPosition = gm.findLastVisibleItemPosition();
-
-
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && mAdapter.isMore()
                         && lastPosition == mAdapter.getItemCount() - 1) {
@@ -165,4 +175,21 @@ public class CollectActivity extends AppCompatActivity {
     public void onClick() {
         MFGT.finish(this);
     }
+
+    class UpdateCollectReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mAdapter.removeItem(intent.getIntExtra(I.Collect.GOODS_ID, 0));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mReceiver != null) {
+            unregisterReceiver(mReceiver);
+        }
+    }
 }
+

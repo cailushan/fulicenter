@@ -22,6 +22,11 @@ public class CollectBean implements Serializable {
     private String goodsEnglishName;
     private String goodsThumb;
     private String goodsImg;
+
+    public CollectBean(int goodsId) {
+        this.goodsId = goodsId;
+    }
+
     private long addTime;
 
     public int getId() {

@@ -43,6 +43,15 @@ public class CollectsAdapter extends RecyclerView.Adapter {
         return isMore ? "加载更多数据 " : "没有更多数据";
     }
 
+    public void removeItem(int goodsId) {
+        if (goodsId != 0) {
+            mList.remove(new CollectBean(goodsId));
+            notifyDataSetChanged();
+
+        }
+
+    }
+
     public void setFooter(String footer) {
         this.footer = footer;
         notifyDataSetChanged();
