@@ -24,4 +24,6 @@ public interface IModelUser {
     void collectCount(Context context, String userName, OnCompleteListener<MessageBean> listener);
 
     void downloadCollect(Context context, String username, int pageId, OnCompleteListener<CollectBean[]> listener);
+
+    void deleteCollects(Context context, String username, int goodsId, OnCompleteListener<MessageBean> listener);
 }

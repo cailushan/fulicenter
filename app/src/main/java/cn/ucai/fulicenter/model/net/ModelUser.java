@@ -81,5 +81,15 @@ public class ModelUser implements IModelUser {
                 .execute(listener);
     }
 
+    @Override
+    public void deleteCollects(Context context, String username, int goodsId, OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_DELETE_COLLECT)
+                .addParam(I.Collect.USER_NAME, username)
+                .addParam(I.Collect.GOODS_ID, String.valueOf(goodsId))
+                .targetClass(MessageBean.class)
+                .execute(listener);
+    }
+
 
 }

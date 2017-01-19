@@ -72,14 +72,14 @@ public class CollectActivity extends AppCompatActivity {
                     downloadList(I.ACTION_PULL_UP, pageId);
                 }
             }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                // 让第一页不刷新
-                int fist = gm.findFirstCompletelyVisibleItemPosition();
-                mSrl.setEnabled(fist == 0);
-            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                // 让第一页不刷新
+//                int fist = gm.findFirstCompletelyVisibleItemPosition();
+//                mSrl.setEnabled(fist == 0);
+//            }
         });
     }
 
@@ -106,7 +106,7 @@ public class CollectActivity extends AppCompatActivity {
 
     private void downloadList(final int action, int PageId) {
 
-        model.downloadCollect(this, user.getMuserName(), pageId, new OnCompleteListener<CollectBean[]>() {
+        model.downloadCollect(this, user.getMuserName(), PageId, new OnCompleteListener<CollectBean[]>() {
             @Override
             public void onSuccess(CollectBean[] result) {
                 mSrl.setRefreshing(false);
