@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    -
 
     <RelativeLayout
         android:id="@+id/layout_cart"
@@ -30,7 +31,6 @@
             android:layout_below="@+id/tv_cart_sum_price"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/tv_cart_buy"
-
             android:text="节省：￥0"
             android:textColor="@color/google_red"
             android:textSize="16sp" />
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:background="#FF6C2C"
+            android:background="@color/main_orange"
             android:gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
@@ -48,12 +48,14 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </RelativeLayout>
+    -
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/layout_cart">
+        -
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -76,10 +78,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="match_parent" />
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
-
 </RelativeLayout>

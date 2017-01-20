@@ -1,6 +1,9 @@
 package cn.ucai.fulicenter.controller.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,8 +21,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.SpaceItemDecoration;
+import cn.ucai.fulicenter.application.FuLiCenterApplication;
 import cn.ucai.fulicenter.application.I;
-import cn.ucai.fulicenter.model.bean.BoutiqueBean;
+import cn.ucai.fulicenter.controller.adapter.CartAdapter;
 import cn.ucai.fulicenter.model.bean.CartBean;
 import cn.ucai.fulicenter.model.bean.User;
 import cn.ucai.fulicenter.model.net.IModelUser;
@@ -28,32 +32,30 @@ import cn.ucai.fulicenter.model.net.OnCompleteListener;
 import cn.ucai.fulicenter.model.utils.ConvertUtils;
 import cn.ucai.fulicenter.view.MFGT;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
 
+    @BindView(R.id.tvRefresh)
+    TextView mTvRefresh;
     @BindView(R.id.rv)
     RecyclerView mRv;
     @BindView(R.id.srl)
     SwipeRefreshLayout mSrl;
-    @BindView(R.id.tvRefresh)
-    TextView tvRefresh;
+    @BindView(R.id.tv_nothing)
+    TextView mtvNothing;
 
     public CartFragment() {
         // Required empty public constructor
     }
 
-    static final int ACTION_DOWNLOAD = 0;
-
-    static final int ACTION_PULL_DOWN = 1;
     LinearLayoutManager lm;
-    ArrayList<BoutiqueBean> mList = new ArrayList<>();
+    CartAdapter mAdapter;
+    ArrayList<CartBean> mList = new ArrayList<>();
     IModelUser model;
-    @BindView(R.id.tv_nothing)
-    TextView mTvNothing;
     User user;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,50 +74,52 @@ public class CartFragment extends Fragment {
         setPullDownListener();
     }
 
+
     private void setPullDownListener() {
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mSrl.setRefreshing(true);
-                tvRefresh.setVisibility(View.VISIBLE);
-                downloadList(ACTION_PULL_DOWN);
+                mTvRefresh.setVisibility(View.VISIBLE);
+                downloadList(I.ACTION_PULL_DOWN);
             }
         });
     }
 
     private void initData() {
-        downloadList(ACTION_DOWNLOAD);
+        downloadList(I.ACTION_DOWNLOAD);
     }
 
     private void downloadList(final int action) {
+        user = FuLiCenterApplication.getUser();
         if (user != null) {
             model.getCart(getContext(), user.getMuserName(), new OnCompleteListener<CartBean[]>() {
                 @Override
                 public void onSuccess(CartBean[] result) {
                     mSrl.setRefreshing(false);
-                    tvRefresh.setVisibility(View.GONE);
+
+                    mTvRefresh.setVisibility(View.GONE);
                     mSrl.setVisibility(View.VISIBLE);
-                    mTvNothing.setVisibility(View.GONE);
+                    mtvNothing.setVisibility(View.GONE);
+
                     if (result != null && result.length > 0) {
                         ArrayList<CartBean> list = ConvertUtils.array2List(result);
                         if (action == I.ACTION_DOWNLOAD || action == I.ACTION_PULL_DOWN) {
-
-                        } else {
-
+                            mAdapter.initData(list);
                         }
                     } else {
                         mSrl.setVisibility(View.GONE);
-                        mTvNothing.setVisibility(View.VISIBLE);
+                        mtvNothing.setVisibility(View.VISIBLE);
                     }
                 }
 
                 @Override
                 public void onError(String error) {
-                    mSrl.setRefreshing(false);
-                    tvRefresh.setVisibility(View.GONE);
-                    mSrl.setVisibility(View.GONE);
+
                 }
             });
+        } else {
+            MFGT.gotoLogin(getActivity());
         }
     }
 
@@ -127,11 +131,14 @@ public class CartFragment extends Fragment {
                 getResources().getColor(R.color.google_blue)
         );
         lm = new LinearLayoutManager(getContext());
-        mRv.addItemDecoration(new SpaceItemDecoration(15));
+        mRv.addItemDecoration(new SpaceItemDecoration(10));
         mRv.setLayoutManager(lm);
         mRv.setHasFixedSize(true);
-        //mAdapter=new BoutiqueAdapter(getContext(),mList);
-        //mRv.setAdapter(mAdapter);
+        mAdapter = new CartAdapter(getContext(), mList);
+        mRv.setAdapter(mAdapter);
+
+        mSrl.setVisibility(View.GONE);
+        mtvNothing.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.tv_nothing)

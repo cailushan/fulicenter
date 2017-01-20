@@ -90,14 +90,16 @@ public class SettingsActivity extends AppCompatActivity {
         if (resultCode != RESULT_OK) {
             return;
         }
-        if (resultCode == RESULT_OK && requestCode == I.REQUEST_CODE_NICK) {
+        if (requestCode == I.REQUEST_CODE_NICK) {
             tvUserNick.setText(FuLiCenterApplication.getUser().getMuserNick());
-        } else if (requestCode == OnSetAvatarListener.REQUEST_CROP_PHOTO) {
-            uploadAvatar();
         } else {
             onSetAvatarListener.setAvatar(requestCode, data, ivUserAvatar);
         }
+        if (requestCode == OnSetAvatarListener.REQUEST_CROP_PHOTO) {
+            uploadAvatar();
+        }
     }
+
 
     private void uploadAvatar() {
         User user = FuLiCenterApplication.getUser();

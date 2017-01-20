@@ -218,8 +218,8 @@ public class GoodsDetailActivity extends AppCompatActivity {
     @OnClick(R.id.iv_good_cart)
     public void updateCart() {
         User user = FuLiCenterApplication.getUser();
+        modelUser = new ModelUser();
         if (modelUser != null) {
-            modelUser = new ModelUser();
             modelUser.updateCart(this, I.ACTION_CART_ADD, user.getMuserName(), goodsId, 1, 0, new OnCompleteListener<MessageBean>() {
                 @Override
                 public void onSuccess(MessageBean result) {
