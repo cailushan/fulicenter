@@ -279,6 +279,7 @@ public interface I {
          * 商品是否已被选中
          */
         String IS_CHECKED = "isChecked";
+        String PAY_PRICE = "payPrice";
     }
 
     interface Collect {
