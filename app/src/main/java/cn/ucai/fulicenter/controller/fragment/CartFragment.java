@@ -54,62 +54,29 @@ public class CartFragment extends Fragment {
     @BindView(R.id.tv_cart_save_price)
     TextView mtvCartSavePrice;
 
-    LinearLayoutManager lm;
+    LinearLayoutManager gm;
     CartAdapter mAdapter;
-    ArrayList<CartBean> mList = new ArrayList<>();
     IModelUser model;
-    UpdateCartReceiver mReceiver;
     User user;
+    ArrayList<CartBean> cartList = new ArrayList<>();
+    UpdateCartReceiver mReceiver;
     int sumPrice = 0;
     int payPrice = 0;
 
-    public CartFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cart, container, false);
-        ButterKnife.bind(this, view);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View layout = inflater.inflate(R.layout.fragment_cart, container, false);
+        ButterKnife.bind(this, layout);
         initView();
         model = new ModelUser();
-        initData();
-        setListener();
-        setReceiverListener();
-        return view;
-    }
-
-    private void setReceiverListener() {
-        mReceiver = new UpdateCartReceiver();
-        IntentFilter filter = new IntentFilter(I.BROADCAST_UPDATA_CART);
-        getContext().registerReceiver(mReceiver, filter);
-        Log.e("CartFragment", "registerReceiver success");
-    }
-
-    private void setListener() {
-        setPullDownListener();
-    }
-
-
-    private void setPullDownListener() {
-        mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mSrl.setRefreshing(true);
-                mTvRefresh.setVisibility(View.VISIBLE);
-                downloadList(I.ACTION_PULL_DOWN);
-            }
-        });
-    }
-
-    private void initData() {
-        downloadList(I.ACTION_DOWNLOAD);
-    }
-
-    private void downloadList(final int action) {
         user = FuLiCenterApplication.getUser();
+        initData(I.ACTION_DOWNLOAD);
+        setPullDownListener();
+        setReceiverListener();
+        return layout;
+    }
+
+    private void initData(final int action) {
         if (user != null) {
             model.getCart(getContext(), user.getMuserName(), new OnCompleteListener<CartBean[]>() {
                 @Override
@@ -118,10 +85,9 @@ public class CartFragment extends Fragment {
                     mTvRefresh.setVisibility(View.GONE);
                     mSrl.setVisibility(View.VISIBLE);
                     mtvNothing.setVisibility(View.GONE);
-
                     if (result != null && result.length > 0) {
                         ArrayList<CartBean> list = ConvertUtils.array2List(result);
-                        mList.addAll(list);
+                        cartList.addAll(list);
                         if (action == I.ACTION_DOWNLOAD || action == I.ACTION_PULL_DOWN) {
                             mAdapter.initData(list);
                         } else {
@@ -135,35 +101,53 @@ public class CartFragment extends Fragment {
 
                 @Override
                 public void onError(String error) {
-
+                    mSrl.setRefreshing(false);
+                    mTvRefresh.setVisibility(View.GONE);
+                    mSrl.setVisibility(View.GONE);
+                    mtvNothing.setVisibility(View.VISIBLE);
+                    CommonUtils.showShortToast(error);
                 }
             });
-        } else {
-            MFGT.gotoLogin(getActivity());
         }
     }
 
     private void initView() {
         mSrl.setColorSchemeColors(
+                getResources().getColor(R.color.google_blue),
                 getResources().getColor(R.color.google_green),
                 getResources().getColor(R.color.google_red),
-                getResources().getColor(R.color.google_yellow),
-                getResources().getColor(R.color.google_blue)
+                getResources().getColor(R.color.google_yellow)
         );
-        lm = new LinearLayoutManager(getContext());
-        mRv.addItemDecoration(new SpaceItemDecoration(10));
-        mRv.setLayoutManager(lm);
+        gm = new LinearLayoutManager(getContext());
+        mRv.addItemDecoration(new SpaceItemDecoration(12));
+        mRv.setLayoutManager(gm);
         mRv.setHasFixedSize(true);
-        mAdapter = new CartAdapter(getContext(), mList);
+        mAdapter = new CartAdapter(getContext(), cartList);
         mRv.setAdapter(mAdapter);
-
         mSrl.setVisibility(View.GONE);
         mtvNothing.setVisibility(View.VISIBLE);
     }
 
+    private void setReceiverListener() {
+        mReceiver = new UpdateCartReceiver();
+        IntentFilter filter = new IntentFilter(I.BROADCAST_UPDATA_CART);
+        getContext().registerReceiver(mReceiver, filter);
+    }
+
+    private void setPullDownListener() {
+        mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSrl.setRefreshing(true);
+                mTvRefresh.setVisibility(View.VISIBLE);
+                initData(I.ACTION_PULL_DOWN);
+            }
+        });
+    }
+
     @OnClick(R.id.tv_nothing)
     public void onClick() {
-        initData();
+        initData(I.ACTION_DOWNLOAD);
     }
 
     @Override
@@ -173,12 +157,11 @@ public class CartFragment extends Fragment {
     }
 
     private void setPrice() {
-        Log.e("CartFragment", "setPrice");
         sumPrice = 0;
         payPrice = 0;
         int savePrice = 0;
-        if (mList != null && mList.size() > 0) {
-            for (CartBean cart : mList) {
+        if (cartList != null && cartList.size() > 0) {
+            for (CartBean cart : cartList) {
                 GoodsDetailsBean goods = cart.getGoods();
                 if (cart.isChecked() && goods != null) {
                     sumPrice += cart.getCount() * getPrice(goods.getCurrencyPrice());
@@ -187,32 +170,31 @@ public class CartFragment extends Fragment {
             }
         }
         mtvCartSumPrice.setText("合计：￥" + sumPrice);
-        mtvCartSavePrice.setText("节省:￥" + savePrice);
+        mtvCartSavePrice.setText("节省：￥" + savePrice);
         mAdapter.notifyDataSetChanged();
         payPrice = sumPrice - savePrice;
     }
 
-    private int getPrice(String price) {
+    //currencyPrice":"￥88"
+    int getPrice(String price) {
         int p = 0;
         p = Integer.valueOf(price.substring(price.indexOf("￥") + 1));
         return p;
     }
 
-    @OnClick(R.id.tv_cart_buy)
-    public void onBuyClick() {
-        if (sumPrice > 0) {
-            Log.e("mian", "sumPrice=" + sumPrice);
-            MFGT.gotoOrder(getActivity(),payPrice);
-        } else {
-            CommonUtils.showShortToast(R.string.order_nothing);
-        }
-    }
-
     class UpdateCartReceiver extends BroadcastReceiver {
-
         @Override
         public void onReceive(Context context, Intent intent) {
             setPrice();
+        }
+    }
+
+    @OnClick(R.id.tv_cart_buy)
+    public void onBuyClick() {
+        if (sumPrice > 0) {
+            MFGT.gotoOrder(getActivity(), payPrice);
+        } else {
+            CommonUtils.showLongToast(R.string.order_nothing);
         }
     }
 

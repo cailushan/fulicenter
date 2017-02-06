@@ -19,7 +19,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toLeftOf="@+id/tv_cart_buy"
+            android:layout_toLeftOf="@id/tv_cart_buy"
             android:text="合计：￥0"
             android:textColor="#f90"
             android:textSize="18sp" />
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_cart_sum_price"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/tv_cart_buy"
+            android:layout_toLeftOf="@id/tv_cart_buy"
             android:text="节省：￥0"
             android:textColor="@color/google_red"
             android:textSize="16sp" />
